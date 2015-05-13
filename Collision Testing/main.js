@@ -29,6 +29,9 @@ var ACCEL = MAXDX * 2;
 var FRICTION = MAXDX * 6;
 var JUMP = METER * 1500;
 
+var SCREEN_WIDTH = canvas.width;
+var SCREEN_HEIGHT = canvas.height;
+
 var LAYER_COUNT = 8;
 var LAYER_WATER = 0;
 var LAYER_LADDERS = 1;
@@ -80,9 +83,6 @@ function initialize()
 	}
 }
 
-var tileset = document.createElement("img");
-tileset.src = "tileset.png";
-
 function cellAtPixelCoord(layer, x, y)
 {
 	if(x<0 || x>SCREEN_WIDTH || y<0)
@@ -120,9 +120,12 @@ function bound(value, min, max)
 	return value;
 }
 
+var tileset = document.createElement("img");
+tileset.src = "tileset.png";
+
 function drawMap()
 {
-	for(var layerIdx=0; layerIdx<LAYER_COUNT; layerIdx++)
+	for(var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++)
 	{
 		var idx = 0;
 		for(var y = 0; y < level1.layers[layerIdx].height; y++)
