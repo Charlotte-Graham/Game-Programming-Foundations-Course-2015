@@ -1,0 +1,2 @@
+Colour that is going to be used for my score counter is #FFFF00
+Font that is going to be used for my score counter is Chalkboard
