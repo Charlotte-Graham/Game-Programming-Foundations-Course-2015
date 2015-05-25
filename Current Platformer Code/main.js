@@ -30,6 +30,11 @@ heartImage.src = "diamond.png";
 
 var TILE = 35;
 
+var ENEMY_MAXDX = METER * 5;
+var ENEMY_ACCEL = ENEMY_MAXDX * 2;
+
+var enemies = [];
+
 var METER = TILE;
 var GRAVITY = METER * 9.8 * 6;
 var MAXDX = METER * 10;
@@ -41,11 +46,14 @@ var JUMP = METER * 1500;
 var SCREEN_WIDTH = canvas.width;
 var SCREEN_HEIGHT = canvas.height;
 
-var LAYER_COUNT = 4;
+var LAYER_COUNT = 3;
 var LAYER_ENEMY = 2;
 var LAYER_BACKGROUND_IMAGES = 0;
 var LAYER_PLATFORMS = 3;
 var LAYER_LADDERS = 1;
+
+//var LAYER_OBJECT_ENEMIES = 2;
+//var LAYER_OBJECT_TRIGGERS = 4;
 
 var MAP = {tw: 60, th: 15};
 
@@ -73,6 +81,24 @@ function initialize()
 			//end if
 		//end for
 	//end for
+
+//all LAYER_ENEMY should be LAYER_OBJECT_ENEMIES
+
+	idx = 0;
+	for(var y = 0; y < level1.layers[LAYER_ENEMY].height; y++)
+	{
+		for(var x = 0; x < level1.layers[LAYER_ENEMY].width; x++)
+		{
+			if(level1.layers[LAYER_ENEMY].data[idx] != 0)
+			{
+				var px = tileToPixel(x);
+				var py = tileToPixel(y);
+				var e = new Enemy(px, py);
+				enemies.push(e);
+			}
+			idx++;
+		}
+	}
 
 	for(var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++)
 	{
@@ -214,6 +240,16 @@ function run()
 
 	drawMap();
 	player.draw();
+
+	for(var i=0; i<enemies.length; i++)
+	{
+		enemies[i].update(deltaTime);
+	}
+
+	/*for(var i=0; i<enemies.length; i++)
+	{
+		enemies[i].draw(deltaTime);
+	}*/
 
 	fpsTime += deltaTime;
 	fpsCount++;
