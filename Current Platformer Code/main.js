@@ -30,11 +30,6 @@ heartImage.src = "diamond.png";
 
 var TILE = 35;
 
-var ENEMY_MAXDX = METER * 5;
-var ENEMY_ACCEL = ENEMY_MAXDX * 2;
-
-var enemies = [];
-
 var METER = TILE;
 var GRAVITY = METER * 9.8 * 6;
 var MAXDX = METER * 10;
@@ -43,17 +38,22 @@ var ACCEL = MAXDX * 2;
 var FRICTION = MAXDX * 6;
 var JUMP = METER * 1500;
 
+var ENEMY_MAXDX = METER * 5;
+var ENEMY_ACCEL = ENEMY_MAXDX * 2;
+
+var enemies = [];
+
 var SCREEN_WIDTH = canvas.width;
 var SCREEN_HEIGHT = canvas.height;
 
-var LAYER_COUNT = 3;
-var LAYER_ENEMY = 2;
+var LAYER_COUNT = 5;
+//var LAYER_ENEMY = 2;
 var LAYER_BACKGROUND_IMAGES = 0;
 var LAYER_PLATFORMS = 3;
 var LAYER_LADDERS = 1;
 
-//var LAYER_OBJECT_ENEMIES = 2;
-//var LAYER_OBJECT_TRIGGERS = 4;
+var LAYER_OBJECT_ENEMIES = 2;
+var LAYER_OBJECT_TRIGGERS = 4;
 
 var MAP = {tw: 60, th: 15};
 
@@ -82,24 +82,7 @@ function initialize()
 		//end for
 	//end for
 
-//all LAYER_ENEMY should be LAYER_OBJECT_ENEMIES
-
 	idx = 0;
-	for(var y = 0; y < level1.layers[LAYER_ENEMY].height; y++)
-	{
-		for(var x = 0; x < level1.layers[LAYER_ENEMY].width; x++)
-		{
-			if(level1.layers[LAYER_ENEMY].data[idx] != 0)
-			{
-				var px = tileToPixel(x);
-				var py = tileToPixel(y);
-				var e = new Enemy(px, py);
-				enemies.push(e);
-			}
-			idx++;
-		}
-	}
-
 	for(var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++)
 	{
 		cells[layerIdx] = [];
@@ -116,6 +99,15 @@ function initialize()
 					cells[layerIdx][y-1][x+1] = 1;
 					cells[layerIdx][y][x+1] = 1;
 				}
+
+				else if(level1.layers[LAYER_OBJECT_ENEMIES].data[idx] != 0)
+				{
+					var px = tileToPixel(x);
+					var py = tileToPixel(y);
+					var e = new Enemy (px, py);
+					enemies.push(e);
+				}
+
 				else if (cells[layerIdx][y][x] != 1)
 				{
 					cells[layerIdx][y][x] = 0;
@@ -246,9 +238,31 @@ function run()
 		enemies[i].update(deltaTime);
 	}
 
-	/*for(var i=0; i<enemies.length; i++)
+	//have to add the code that allows you to shoot the bullets
+	/*var hit = false;
+	for(var i=0; i<bullets.length; i++)
 	{
-		enemies[i].draw(deltaTime);
+		bullets[i].update(deltaTime);
+		if(bullets[i].position.x - worldOffsetX < 0 || bullets[i].position.x - worldOffsetX > SCREEN_WIDTH)
+		{
+			hit = true;
+		}
+
+		for(var j=0; j<enemies.length; j++)
+		{
+			if(intersects(bullets[i].position.x, bullets[i].position.y, TILE, TILE, enemies[j].position.x, enemies[j].position.y, TILE, TILE) == true)
+			{
+				enemies.splice(j, 1);
+				hit = true;
+				score += 1;
+				break;
+			}
+		}
+		if(hit == true)
+		{
+			bullets.splice(i, 1);
+			break;
+		}
 	}*/
 
 	fpsTime += deltaTime;
