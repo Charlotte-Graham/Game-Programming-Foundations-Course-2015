@@ -421,8 +421,9 @@ function runGame(deltaTime)
 	//DRAW
 	drawMap();
 	player.draw();
+	//enemy.draw();
 	// draw the FPS
-	context.fillStyle = "#f00";
+	context.fillStyle = "yellow";
 	context.font="14px Arial";
 	context.fillText("FPS: " + fps, 5, 20, 100);
 	
@@ -493,6 +494,8 @@ var gameWinScreen =
 	width: 640,
 	height: 525
 };
+
+gameWinScreen.image.src = "gameWin.png"
 
 function runGameWin(deltaTime)
 {
