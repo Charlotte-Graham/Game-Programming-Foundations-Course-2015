@@ -54,8 +54,8 @@ var gameState = STATE_SPLASH;
 //layers
 var LAYER_COUNT = 5;
 var LAYER_BACKGROUND_IMAGES = 0;
-var LAYER_PLATFORMS = 2;
-var LAYER_LADDERS = 1;
+var LAYER_PLATFORMS = 1;
+var LAYER_LADDERS = 2;
 var LAYER_OBJECT_ENEMIES = 3;
 var LAYER_OBJECT_TRIGGERS = 4;
 
@@ -113,13 +113,13 @@ function initialize()
 					cells[layerIdx][y][x+1] = 1;
 				}
 
-				/*else if(level1.layers[LAYER_OBJECT_ENEMIES].data[idx] != 0)
+				else if(level1.layers[LAYER_OBJECT_ENEMIES].data[idx] != 0)
 				{
 					var px = tileToPixel(x);
 					var py = tileToPixel(y);
 					var e = new Enemy (px, py);
 					enemies.push(e);
-				}*/
+				}
 
 				else if (cells[layerIdx][y][x] != 1)
 				{
@@ -288,7 +288,7 @@ var titleScreen =
 {
 	image: document.createElement("img"),
 	width: 640,
-	heigth: 480
+	heigth: 525
 };
 
 titleScreen.image.src = "splashScreen.png"
