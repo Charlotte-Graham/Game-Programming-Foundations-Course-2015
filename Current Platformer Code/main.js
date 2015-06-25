@@ -284,32 +284,6 @@ function drawMap()
 }
 
 
-
-function run()
-{
-	context.fillStyle = "#66CCFF";		
-	context.fillRect(0, 0, canvas.width, canvas.height);
-	
-	var deltaTime = getDeltaTime();
-
-	switch(gameState)
-    {
-        case STATE_SPLASH:
-            runSplash(deltaTime);
-            break;
-        case STATE_GAME:
-            runGame(deltaTime);
-            break;
-        case STATE_GAMEOVER:
-            runGameOver(deltaTime);
-            break;
-        case STATE_GAMEWIN:
-        	runGameWin(deltaTime);
-        	break;
-    }
-
-}
-
 var titleScreen = 
 {
 	image: document.createElement("img"),
@@ -503,6 +477,31 @@ function runGameWin(deltaTime)
 	context.fillRect(0, 0, canvas.width, canvas.height);
 	
 	context.drawImage(gameWinScreen.image, 0, 0);
+}
+
+function run()
+{
+	context.fillStyle = "#66CCFF";		
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	
+	var deltaTime = getDeltaTime();
+
+	switch(gameState)
+    {
+        case STATE_SPLASH:
+            runSplash(deltaTime);
+            break;
+        case STATE_GAME:
+            runGame(deltaTime);
+            break;
+        case STATE_GAMEOVER:
+            runGameOver(deltaTime);
+            break;
+        case STATE_GAMEWIN:
+        	runGameWin(deltaTime);
+        	break;
+    }
+
 }
 
 initialize();
