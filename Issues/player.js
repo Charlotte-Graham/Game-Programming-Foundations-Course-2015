@@ -40,7 +40,7 @@ var Player = function()
 	}
 //9
 	this.position = new Vector2();
-	this.position.set(1 * TILE, 0 * TILE);
+	this.position.set(35, 70);
 
 	this.width = 159;
 	this.height = 163;
@@ -49,6 +49,8 @@ var Player = function()
 
 	this.falling = true;
 	this.jumping = false;
+
+	this.isDead = false;
 //LEFT
 	this.direction = RIGHT;
 
