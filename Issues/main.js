@@ -357,7 +357,7 @@ function runGame(deltaTime)
 					enemies.splice(j, 1);
 					hit = true;
 					// increment the player score
-					score += 1;
+					score += 15;
 					break;
 				}
 			}
@@ -377,7 +377,7 @@ function runGame(deltaTime)
 				player.position.x, player.position.y, player.width/2, player.height/2)== true)
 			{
 			lives -= 1;
-			player.position.set(35, 250);
+			player.position.set(35, 70);
 			}
 		}
 	}
@@ -434,7 +434,7 @@ function runGame(deltaTime)
 		{
 				player.isDead == true;
 				lives -= 1;
-				player.position.set(35, 35);
+				player.position.set(35, 70);
 		}
 		if(lives == 0)
 		{
